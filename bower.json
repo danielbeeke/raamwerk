@@ -1,0 +1,10 @@
+{
+  "name": "raamwerk",
+  "private": true,
+  "dependencies": {
+    "jquery": "~1.11.1",
+    "modernizr": "~2.8.2",
+    "twig.js": "~0.7.2",
+    "requirejs": "~2.1.15"
+  }
+}
