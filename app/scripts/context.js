@@ -40,6 +40,8 @@ define(['contexts', 'smooth_transitions'], function (contexts, smooth_transition
     },
 
     getPluginsAndContextsFromContexts: function (selectedContexts, type) {
+      context.plugins[type] = {}
+
       $.each(selectedContexts, function (contextName, contextDefinition) {
         // Get all the used condition plugins by the defined contexts.
         $.each(contextDefinition[type], function (pluginName, pluginInput) {

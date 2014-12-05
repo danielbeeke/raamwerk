@@ -6,7 +6,7 @@ define([], function () {
       conditions: {
         // The structure is defined by the plugin.
         // The route(_context_condition) asks an array of paths.
-        route: ['demo']
+        route: ['']
       },
       reactions: {
         // The structure is defined by the plugin.
@@ -16,6 +16,7 @@ define([], function () {
           layout: 'two-column',
           data: function () {
             return {
+              label: 'Woop',
               link: 'demo2'
             }
           },
@@ -40,7 +41,8 @@ define([], function () {
           layout: 'two-column',
           data: function () {
             return {
-              link: 'demo'
+              label: 'Demo',
+              link: ''
             }
           },
           postRender: function () {

@@ -1,8 +1,6 @@
 define(['history'], function (history) {
   'use strict'
 
-  // The layers factory
-
   var smooth_transitions = {
     init: function () {
       $(document).on('click touch', 'a', function(e) {

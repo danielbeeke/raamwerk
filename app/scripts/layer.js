@@ -1,4 +1,4 @@
-define(['layers', 'renderer'], function (layers, renderer) {
+define(['renderer'], function (renderer) {
   'use strict'
 
   // A layer class.
@@ -27,7 +27,7 @@ define(['layers', 'renderer'], function (layers, renderer) {
       render: function () {
         innerClass.claimElement()
         var html = renderer.get(innerClass.layout, innerClass.data())
-        $(innerClass.element).html(html)
+        $(innerClass.element).html(html).css('z-index', 0)
       }
     }
 
