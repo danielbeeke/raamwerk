@@ -1,22 +1,22 @@
-define(['context'], function (context) {
+define(['context', 'history'], function (context, history) {
   'use strict'
 
   // A context condition plugin gets a list of contexts that apply for the plugin.
-  // The only convention it has to follow is to pass the contexts onto context.react when needed.
+  // The only convention it has to follow is to pass the contexts onto context.react when needed,
+  // Initiated by the init function.
 
   var route_context_condition = {
     contexts: {},
     init: function (contexts) {
       route_context_condition.contexts = contexts
 
-      var path = route_context_condition.cleanPath(location.pathname)
-
-      $(window).on('popstate', function(e) {
+      $(window).on('popstate smooth_transition', function(e) {
+        var path = route_context_condition.cleanPath(location.pathname)
         route_context_condition.execute(path)
       })
 
       // Initial path.
-      route_context_condition.execute(path)
+      $(window).triggerHandler('smooth_transition')
     },
 
     // Execute

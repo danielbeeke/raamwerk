@@ -3,6 +3,7 @@ require.config({
   paths: {
     jquery: '../bower_components/jquery/dist/jquery',
     twig: '../bower_components/twig.js/twig',
+    history: '../bower_components/history/history',
   }
 })
 

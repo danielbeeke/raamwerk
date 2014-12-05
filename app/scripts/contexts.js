@@ -2,7 +2,7 @@ define([], function () {
   'use strict'
 
   var contexts = {
-    'about': {
+    'demo': {
       conditions: {
         // The structure is defined by the plugin.
         // The route(_context_condition) asks an array of paths.
@@ -12,10 +12,36 @@ define([], function () {
         // The structure is defined by the plugin.
         // The layer(_context_reaction) asks an array of object from which layers can be made.
         layer: [{
-          name: 'info',
+          key: 'demo',
           layout: 'two-column',
           data: function () {
+            return {
+              link: 'demo2'
+            }
+          },
+          postRender: function () {
 
+          }
+        }]
+      }
+    },
+
+    'demo2': {
+      conditions: {
+        // The structure is defined by the plugin.
+        // The route(_context_condition) asks an array of paths.
+        route: ['demo2']
+      },
+      reactions: {
+        // The structure is defined by the plugin.
+        // The layer(_context_reaction) asks an array of object from which layers can be made.
+        layer: [{
+          key: 'demo2',
+          layout: 'two-column',
+          data: function () {
+            return {
+              link: 'demo'
+            }
           },
           postRender: function () {
 
@@ -23,6 +49,8 @@ define([], function () {
         }]
       }
     }
+
+
   }
 
   return contexts
