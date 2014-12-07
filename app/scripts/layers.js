@@ -9,15 +9,15 @@ define(['layer'], function (layer) {
       if (!layers.stack[info.key]) {
         var currentLayer = layers.stack[info.key] = new layer(info)
         currentLayer.render()
+        if (currentLayer.postRender) {
+          currentLayer.postRender()
+        }
+      }
+      else {
+        var currentLayer = layers.stack[info.key]
       }
 
-      layers.makeActive(info.key)
-    },
-
-    // Could be moved to the class.
-    makeActive: function (layerKey) {
-      $('[layer].active').removeClass('active')
-      $(layers.stack[layerKey].element).addClass('active')
+      currentLayer.makeActive()
     },
   }
 

@@ -24,6 +24,11 @@ define(['renderer'], function (renderer) {
         innerClass.element = $('[layer="' + innerClass.key + '"]')[0]
       },
 
+      makeActive: function () {
+        $('[layer].active').removeClass('active')
+        $(innerClass.element).addClass('active')
+      },
+
       render: function () {
         innerClass.claimElement()
         var html = renderer.get(innerClass.layout, innerClass.data())

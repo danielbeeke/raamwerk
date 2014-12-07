@@ -15,12 +15,39 @@ body,
   position: absolute;
   width: 100%;
   height: 100%;
-  background: #eee;
-  transition: opacity 4s, transform 4s;
   top: 0;
   left: 0;
+  background: white;
+}
+
+[layer="tuner"] {
+  &:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+    background: black;
+    opacity: .8;
+    transition: opacity .4s;
+    pointer-events: none;
+  }
 
   &.active {
-    z-index: 3;
+    &:after {
+      opacity: 0;
+      // z-index: -1;
+    }
+  }
+}
+
+[layer="about"] {
+  transform: translateX(100%);
+  transition: transform .4s;
+  background: red;
+
+  &.active {
+    transform: translateX(0);
   }
 }
