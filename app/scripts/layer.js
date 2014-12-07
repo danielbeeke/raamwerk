@@ -27,7 +27,7 @@ define(['renderer'], function (renderer) {
       render: function () {
         innerClass.claimElement()
         var html = renderer.get(innerClass.layout, innerClass.data())
-        $(innerClass.element).html(html).css('z-index', 0)
+        $(innerClass.element).html(html)
       }
     }
 

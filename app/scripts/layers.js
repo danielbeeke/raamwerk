@@ -11,25 +11,13 @@ define(['layer'], function (layer) {
         currentLayer.render()
       }
 
-      layers.bringToTop(info.key)
+      layers.makeActive(info.key)
     },
 
-    // TODO we need some code here to fix the stack not always adding 1.
-    bringToTop: function (layerKey) {
-      var max = layers.getMaxZindex()
-
+    // Could be moved to the class.
+    makeActive: function (layerKey) {
       $('[layer].active').removeClass('active')
-      $(layers.stack[layerKey].element).css('z-index', max + 1).addClass('active')
-    },
-
-    getMaxZindex: function () {
-      var zIndexes = []
-
-      $.each(layers.stack, function (key, layer) {
-        zIndexes.push(parseInt($(layer.element).css('z-index')))
-      })
-
-      return Math.max.apply(null, zIndexes)
+      $(layers.stack[layerKey].element).addClass('active')
     },
   }
 

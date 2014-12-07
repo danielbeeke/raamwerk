@@ -41,12 +41,32 @@ define(['context', 'history'], function (context, history) {
       return path
     },
 
-    // TODO, use fine regexes so we can use dynamic paths.
     compare: function (path, conditionPath) {
-      if (path == conditionPath) {
-        return true
-      }
-    }
+      return (conditionPath == '<front>' && path == '') ? true : new RegExp(route_context_condition.convertToRegExp(conditionPath), 'ig').test(path)
+    },
+
+    // Converts route to a regular expression, e.g.: users/*/mickeymouse -> users\/.*\/mickeymouse
+    convertToRegExp: function (conditionPath) {
+      // Escapes symbols
+      conditionPath = route_context_condition.preg_quote(conditionPath)
+
+      // Rewrites wildcards again, because preg_quote() escapes them:
+      // Replace wildcard followed by a slash by a piece of regex that matches wildcards not containing a slash
+      conditionPath = conditionPath.replace('\\*/', '[^\/]*/')
+      // Replace wildcard not followed by a slash with a regex wildcard
+      conditionPath = conditionPath.replace('\\*', '.*')
+
+      // Makes sure the whole hash must match (start to end)
+      conditionPath = '^' + conditionPath + '$'
+      return conditionPath
+    },
+
+    preg_quote: function (str, delimiter) {
+      // Borrowed from php.js
+      return String(str)
+        .replace(new RegExp('[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\' + (delimiter || '') + '-]', 'g'), '\\$&');
+    },
+
   }
 
   return route_context_condition
