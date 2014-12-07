@@ -9,15 +9,14 @@ define(['layer'], function (layer) {
       if (!layers.stack[info.key]) {
         var currentLayer = layers.stack[info.key] = new layer(info)
         currentLayer.render()
-        if (currentLayer.postRender) {
-          currentLayer.postRender()
-        }
       }
       else {
         var currentLayer = layers.stack[info.key]
       }
 
-      currentLayer.makeActive()
+      setTimeout(function () {
+        currentLayer.makeActive()
+      }, 10)
     },
   }
 

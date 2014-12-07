@@ -30,16 +30,20 @@ define(['renderer'], function (renderer) {
       },
 
       render: function () {
+        var data = innerClass.data && typeof(innerClass.data) == 'function' ? innerClass.data() : {}
+        var html = renderer.get(innerClass.layout, data)
         innerClass.claimElement()
-        var html = renderer.get(innerClass.layout, innerClass.data())
         $(innerClass.element).html(html)
+
+        if (innerClass.postRender && typeof(innerClass.postRender) == 'function') {
+          innerClass.postRender()
+        }
       }
     }
 
     // Inherit the given data/functions to the class.
-    if (info.data) { innerClass.data = info.data } else { innerClass.data = function () {} }
+    if (info.data) { innerClass.data = info.data }
     if (info.postRender) { innerClass.postRender = info.postRender }
-    if (info.zIndex) { innerClass.zIndex = info.zIndex }
 
     return innerClass
   }
