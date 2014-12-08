@@ -1,0 +1,103 @@
+/* line 4, ../../app/styles/main.scss */
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  transform: translateZ(0);
+}
+
+/* line 15, ../../app/styles/main.scss */
+[layer="home"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: white;
+}
+/* line 22, ../../app/styles/main.scss */
+[layer="home"]:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: '';
+  background: black;
+  opacity: .5;
+  transition: opacity .4s;
+  pointer-events: none;
+}
+/* line 36, ../../app/styles/main.scss */
+[layer="home"].active:after {
+  opacity: 0;
+  transition: opacity .4s .1s;
+}
+
+/* line 43, ../../app/styles/main.scss */
+[layer="getting-started"] {
+  width: 400px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  transform: translateX(100%);
+  transition: transform .4s ease-in-out;
+  background: white;
+}
+/* line 53, ../../app/styles/main.scss */
+[layer="getting-started"].active {
+  transform: translateX(0);
+}
+
+/* line 58, ../../app/styles/main.scss */
+[layer="docs"] {
+  width: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  transform: rotateX(-180deg);
+  transition: transform .4s ease-in-out;
+  background: white;
+  transform-origin: center top 0;
+  z-index: 2;
+}
+/* line 70, ../../app/styles/main.scss */
+[layer="docs"].active {
+  transform: rotateX(0);
+}
+
+/* line 75, ../../app/styles/main.scss */
+[layer="about"] {
+  transition: all .4s ease-in-out;
+  background: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 1px;
+  width: 1px;
+  overflow-y: auto;
+}
+/* line 86, ../../app/styles/main.scss */
+[layer="about"].active {
+  height: 400px;
+  width: 400px;
+}
+
+/* line 93, ../../app/styles/main.scss */
+#app {
+  perspective: 1000px;
+}
+
+/* line 97, ../../app/styles/main.scss */
+.header {
+  height: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+}
