@@ -1,4 +1,4 @@
-define(['history'], function (history) {
+define(['history'], function () {
   'use strict'
 
   var smooth_transitions = {

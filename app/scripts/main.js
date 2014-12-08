@@ -7,7 +7,11 @@ require.config({
   }
 })
 
-require(['jquery', 'context'], function ($, context) {
+require(['jquery', 'context',
+    // Just so it builds.
+    'route_context_condition',
+    'layer_context_reaction']
+  , function ($, context) {
 
   'use strict'
 

@@ -72,6 +72,21 @@ module.exports = function (grunt) {
             }
         },
 
+        buildcontrol: {
+            options: {
+                dir: 'dist',
+                commit: true,
+                push: true,
+                message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
+            },
+            pages: {
+                options: {
+                    remote: 'git@github.com:danielbeeke/raamwerk.git',
+                    branch: 'gh-pages'
+                }
+            }
+        },
+
         connect: {
             options: {
                 port: 9000,
@@ -198,7 +213,7 @@ module.exports = function (grunt) {
                 imagesDir: '<%= yeoman.app %>/images',
                 javascriptsDir: '<%= yeoman.app %>/scripts',
                 /*fontsDir: '<%= yeoman.app %>/styles/fonts',*/
-                importPath: 'bower_components',
+                importPath: '<%= yeoman.app %>/bower_components',
                 httpImagesPath: '/images',
                 httpGeneratedImagesPath: '/images/generated',
                 httpFontsPath: '/styles/fonts',
