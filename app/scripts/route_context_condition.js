@@ -5,17 +5,11 @@ define(['context', 'history'], function (context, history) {
   // The only convention it has to follow is to pass the contexts onto context.react when needed,
   // Initiated by the init function.
 
-  var basePath = ''
   var route_context_condition = {
     contexts: {},
     init: function (contexts) {
       route_context_condition.contexts = contexts
 
-      var firstUrl = window.location.href.split('/')
-
-      if (firstUrl[3] != '') {
-        basePath = firstUrl[3]
-      }
 
       $(window).on('popstate smooth_transition', function(e) {
         var path = route_context_condition.cleanPath(location.pathname)
@@ -43,7 +37,7 @@ define(['context', 'history'], function (context, history) {
     },
 
     cleanPath: function (path) {
-      path = path.replace(basePath, '')
+      path = path.replace(window.basePath, '')
 
       // Clean the window.location.pathname
       if (path.charAt(0) == '/') path = path.substr(1)

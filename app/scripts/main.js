@@ -15,6 +15,14 @@ require(['jquery', 'context',
 
   'use strict'
 
-  context.init()
+  var firstUrl = window.location.href.split('/')
 
+  if (firstUrl[3] != '') {
+    window.basePath = '/' + firstUrl[3] + '/'
+  }
+  else {
+    window.basePath = '/'
+  }
+
+  context.init()
 })

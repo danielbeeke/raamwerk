@@ -10,7 +10,7 @@ define(['history'], function () {
     },
 
     goTo: function (path) {
-      history.pushState(null, null, path)
+      history.pushState(null, null, basePath + path)
       $(window).triggerHandler('smooth_transition')
     },
   }
