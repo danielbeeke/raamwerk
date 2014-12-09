@@ -6,6 +6,8 @@
     "modernizr": "~2.8.2",
     "twig.js": "~0.7.2",
     "requirejs": "~2.1.15",
-    "history": "devote/HTML5-History-API#~4.1.15"
+    "history": "devote/HTML5-History-API#~4.1.15",
+    "dragdealer": "skidding/dragdealer#~0.9.8",
+    "underscore": "~1.7.0"
   }
 }

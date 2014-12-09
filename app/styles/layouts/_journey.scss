@@ -1,0 +1,52 @@
+$red: red;
+
+[layer="journey"] {
+  transition: all .4s ease-in-out;
+  background: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  z-index: -1;
+
+  &.active {
+    z-index: 1;
+  }
+}
+
+.journey-background {
+  width: 100%;
+  height: 600px;
+}
+
+.journey-timeline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  @include grid-span(8, 6);
+}
+
+.journey-timeline-dragdealer {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  top: 0;
+}
+
+.journey-timeline-dragdealer .handle {
+  @include grid-span(1, 8, 8);
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  background: $red;
+  height: 30px;
+  background: #CC0000;
+}
+
+.journey-stories {
+  @include grid-span(7, 6);
+}

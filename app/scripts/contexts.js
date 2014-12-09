@@ -23,45 +23,34 @@ define([], function () {
         route: ['journey/*']
       },
       reactions: {
-        dependencies: ['journey'],
         layer: [{
-          key: 'about',
-          layout: 'about',
-          // data: function () {},
-          // postRender: function () {}
-        }]
-      }
-    },
+          key: 'journey',
+          layout: 'journey',
+          dependencies: ['journey', 'fixtures', 'timeline'],
+          data: function () {
+            var returnData = require('fixtures')
+            returnData.timeline = require('timeline')
 
-    'docs': {
-      conditions: {
-        route: ['docs']
-      },
-      reactions: {
-        layer: [{
-          key: 'docs',
-          layout: 'docs',
-          // data: function () {},
+            return returnData
+          },
           postRender: function () {
-            require(['docs'])
+            var journey = require('journey')
+            journey.init()
           }
         }]
       }
     },
 
-    'getting-started': {
+    'devel': {
       conditions: {
-        route: ['getting-started']
+        route: ['*']
       },
       reactions: {
-        layer: [{
-          key: 'getting-started',
-          layout: 'getting-started',
-          // data: function () {},
-          // postRender: function () {}
-        }]
+        dependencies: ['devel']
       }
-    }
+    },
+
+
   }
 
   return contexts
