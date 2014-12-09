@@ -1,4 +1,4 @@
-define(['context', 'history'], function (context, history) {
+define(['context', 'history', 'smooth_transitions'], function (context, history, smooth_transitions) {
   'use strict'
 
   // A context condition plugin gets a list of contexts that apply for the plugin.
@@ -10,6 +10,9 @@ define(['context', 'history'], function (context, history) {
     init: function (contexts) {
       route_context_condition.contexts = contexts
 
+      // Enable fake urls with smooth transitions.
+      // HTML5 history API.
+      smooth_transitions.init()
 
       $(window).on('popstate smooth_transition', function(e) {
         var path = route_context_condition.cleanPath(location.pathname)
@@ -37,8 +40,6 @@ define(['context', 'history'], function (context, history) {
     },
 
     cleanPath: function (path) {
-      path = path.replace(window.basePath, '')
-
       // Clean the window.location.pathname
       if (path.charAt(0) == '/') path = path.substr(1)
       return path

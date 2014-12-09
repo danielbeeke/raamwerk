@@ -1,4 +1,4 @@
-define(['contexts', 'smooth_transitions'], function (contexts, smooth_transitions) {
+define(['contexts'], function (contexts) {
   'use strict'
 
   var context = {
@@ -8,10 +8,6 @@ define(['contexts', 'smooth_transitions'], function (contexts, smooth_transition
     },
 
     init: function () {
-      // Enable fake urls with smooth transitions.
-      // HTML5 history API.
-      smooth_transitions.init()
-
       context.getPluginsAndContextsFromContexts(contexts, 'conditions')
 
       // Init all condition plugins.

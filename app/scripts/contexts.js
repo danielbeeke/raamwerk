@@ -1,11 +1,12 @@
 define([], function () {
   'use strict'
 
+  // TODO make a match all conditions.
   var contexts = {
 
     'home': {
       conditions: {
-        route: ['<front>']
+        route: ['*']
       },
       reactions: {
         layer: [{
@@ -17,11 +18,12 @@ define([], function () {
       }
     },
 
-    'about': {
+    'journey': {
       conditions: {
-        route: ['about']
+        route: ['journey/*']
       },
       reactions: {
+        dependencies: ['journey'],
         layer: [{
           key: 'about',
           layout: 'about',
@@ -40,7 +42,9 @@ define([], function () {
           key: 'docs',
           layout: 'docs',
           // data: function () {},
-          // postRender: function () {}
+          postRender: function () {
+            require(['docs'])
+          }
         }]
       }
     },

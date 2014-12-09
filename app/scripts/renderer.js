@@ -8,7 +8,7 @@ define(['twig'], function (twig) {
       if (!renderer.twigTemplates[template]) {
         var loaded = twig.twig({
           id: template,
-          href: basePath + 'templates/' + template + '.html',
+          href: '/templates/' + template + '.html',
           async: false
         })
 
