@@ -1,4 +1,4 @@
-define(['renderer'], function (renderer) {
+define(['raamwerk/renderer'], function (renderer) {
   'use strict'
 
   // A layer class.

@@ -46,7 +46,7 @@ define([], function () {
         route: ['*']
       },
       reactions: {
-        dependencies: ['devel']
+        dependencies: ['raamwerk/devel']
       }
     },
 

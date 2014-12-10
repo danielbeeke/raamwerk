@@ -1,4 +1,4 @@
-define(['layer'], function (layer) {
+define(['raamwerk/layer'], function (layer) {
   'use strict'
 
   // The layers factory

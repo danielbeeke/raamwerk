@@ -1,4 +1,4 @@
-define(['context', 'history', 'smooth_transitions'], function (context, history, smooth_transitions) {
+define(['raamwerk/context', 'history', 'raamwerk/smooth_transitions'], function (context, history, smooth_transitions) {
   'use strict'
 
   // A context condition plugin gets a list of contexts that apply for the plugin.

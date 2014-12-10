@@ -12,7 +12,7 @@ define(['contexts'], function (contexts) {
 
       // Init all condition plugins.
       $.each(context.plugins['conditions'], function (pluginName, pluginInfo) {
-        require([pluginName + '_context_condition'], function (loadedPlugin) {
+        require(['raamwerk/context/' + pluginName + '_context_condition'], function (loadedPlugin) {
           if (loadedPlugin.init && typeof(loadedPlugin.init) == 'function') {
             loadedPlugin.init(pluginInfo.contexts)
           }
@@ -26,7 +26,7 @@ define(['contexts'], function (contexts) {
 
       // Init all condition plugins.
       $.each(context.plugins['reactions'], function (pluginName, pluginInfo) {
-        require([pluginName + '_context_reaction'], function (loadedPlugin) {
+        require(['raamwerk/context/' + pluginName + '_context_reaction'], function (loadedPlugin) {
           if (loadedPlugin.execute && typeof(loadedPlugin.execute) == 'function') {
             loadedPlugin.execute(pluginInfo.contexts)
           }

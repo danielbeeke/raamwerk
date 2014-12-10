@@ -1,4 +1,4 @@
-define(['layers'], function (layers) {
+define(['raamwerk/layers'], function (layers) {
   'use strict'
 
   var layer_context_reaction = {

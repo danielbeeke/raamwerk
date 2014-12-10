@@ -9,7 +9,7 @@ require.config({
   }
 })
 
-require(['jquery', 'context'], function ($, context) {
+require(['jquery', 'raamwerk/context'], function ($, context) {
 
   'use strict'
 
