@@ -6,8 +6,10 @@ define(['raamwerk/layers'], function (layers) {
       $.each(contexts, function (contextName, contextDefinition) {
         $.each(contextDefinition.reactions.layer, function (delta, layerInfo) {
 
-          if (layerInfo.dependencies) {
-            require(layerInfo.dependencies, function () {
+          // Here we cross the line of our own plugin and the dependencies plugin.
+          // We need to ensure the dependencies are loaded before we render.
+          if (contextDefinition.reactions.dependencies) {
+            require(contextDefinition.reactions.dependencies, function () {
               layers.addLayer(layerInfo)
             })
           }

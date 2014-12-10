@@ -6,6 +6,7 @@ define(['raamwerk/layer'], function (layer) {
   var layers = {
     stack: {},
     addLayer: function (info) {
+
       if (!layers.stack[info.key]) {
         var currentLayer = layers.stack[info.key] = new layer(info)
         currentLayer.render()
