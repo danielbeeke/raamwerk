@@ -2,8 +2,15 @@ define(['twig'], function (twig) {
   'use strict'
 
   // Makes it possible to render sub templates.
-  twig.extendFunction("child", function(template, data) {
-    return renderer.get(template, data)
+  twig.extendFunction("child", function(template, data, needsParent) {
+    if (needsParent) {
+      var returnData = {}
+      returnData[needsParent] = data
+      return renderer.get(template, returnData)
+    }
+    else {
+      return renderer.get(template, data)
+    }
   })
 
   var renderer = {

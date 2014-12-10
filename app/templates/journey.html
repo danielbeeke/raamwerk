@@ -1,5 +1,5 @@
-<div class="journey-background" style="background: url({{ journey['mijn-china-reis'].background }});"></div>
+<div class="journey-background" style="background: url({{ journey.background }});"></div>
 
-{{ child('journey/timeline', journey['mijn-china-reis']) }}
+{{ child('journey/timeline', timeline, 'timeline') }}
 
-{{ child('journey/stories', journey['mijn-china-reis']) }}
+{{ child('journey/stories', journey) }}

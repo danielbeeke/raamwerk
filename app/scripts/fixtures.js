@@ -3,23 +3,19 @@ define([], function () {
 
   var fixtures = {}
 
-  fixtures.author = {}
-
-  fixtures.author['henk-jansen'] = {
+  fixtures.author = {
     name: 'Henk Jansen',
     avatar: '/images/fixtures/henk-jansen.jpg'
   }
 
-  fixtures.journey = {}
-
-  fixtures.journey['mijn-china-reis'] = {
+  fixtures.journey = {
     background: '/images/fixtures/header.jpg',
     title: 'Mijn China reis',
     stories: [],
     introduction: 'Deze zomer reis ik door <strong>China</strong> en <strong>Mongolie</strong>, hier hoop ik jullie op de hoogte te houden van mijn avontuur!'
   }
 
-  fixtures.journey['mijn-china-reis'].stories.push(
+  fixtures.journey.stories.push(
     {
       slug: 'samba-muziek',
       title: 'Welkom met samba muziek en gratis kikker concert 3',
@@ -32,7 +28,7 @@ define([], function () {
     }
   )
 
-  fixtures.journey['mijn-china-reis'].stories.push(
+  fixtures.journey.stories.push(
     {
       title: 'Dag van mijn reis. 2',
       slug: '12-en-13-oktober',
@@ -45,7 +41,7 @@ define([], function () {
     }
   )
 
-  fixtures.journey['mijn-china-reis'].stories.push(
+  fixtures.journey.stories.push(
     {
       title: 'Dag van mijn reis. 1',
       slug: '10-en-11-oktober',

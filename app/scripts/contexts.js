@@ -22,19 +22,19 @@ define([], function () {
         route: ['journey/*']
       },
       reactions: {
-        dependencies: ['journey', 'fixtures', 'timeline'],
+        dependencies: ['journey/timeline', 'fixtures'],
         layer: [{
           key: 'journey',
           layout: 'journey',
           data: function () {
+            var timeline = require('journey/timeline')
             var returnData = require('fixtures')
-            returnData.timeline = require('timeline')
-
+            returnData.timeline = timeline.prepareTimeline(require('fixtures'))
             return returnData
           },
           postRender: function () {
-            var journey = require('journey')
-            journey.init()
+            var timeline = require('journey/timeline')
+            timeline.init()
           }
         }]
       }

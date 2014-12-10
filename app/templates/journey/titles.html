@@ -1,0 +1,14 @@
+<div class="timeline--titles standard">
+  {% for part in timeline %}
+
+    {% if part.type == 'icon' %}
+      <a class="timeline--entree" href="{{ part.story.slug }}">
+        <div class="timeline--icon" data-slug="{{ part.story.slug }}"></div>
+        <h2 class="timeline--title">{{ part.story.title }}</h2>
+      </a>
+    {% else %}
+      <div class="timeline--path"></div>
+    {% endif %}
+
+  {% endfor %}
+</div>
