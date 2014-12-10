@@ -1,4 +1,4 @@
-define(['contexts'], function (contexts) {
+define(['contexts', 'underscore'], function (contexts, _) {
   'use strict'
 
   var context = {
@@ -7,22 +7,67 @@ define(['contexts'], function (contexts) {
       reactions: {}
     },
 
+    activeConditionPlugins: {},
+
     init: function () {
+      // Prepare the data structure,
+      // This function maps the following structure plugin > contexts
       context.getPluginsAndContextsFromContexts(contexts, 'conditions')
 
-      // Init all condition plugins.
       $.each(context.plugins['conditions'], function (pluginName, pluginInfo) {
-        require(['raamwerk/context/' + pluginName + '_context_condition'], function (loadedPlugin) {
-          if (loadedPlugin.init && typeof(loadedPlugin.init) == 'function') {
-            loadedPlugin.init(pluginInfo.contexts)
-          }
-          context.plugins['conditions'][pluginName].plugin = loadedPlugin
+        context.activeConditionPlugins[pluginName] = 'raamwerk/context/' + pluginName + '_context_condition'
+      })
+
+      // Require all the context plugins for the app at once.
+      require(_.values(context.activeConditionPlugins), function () {
+        $.each(context.activeConditionPlugins, function (pluginName, pluginPath) {
+          var plugin = require(pluginPath)
+
+          // Init the plugin and give the contexts for it.
+          plugin.init(context.plugins['conditions'][pluginName].contexts)
         })
       })
     },
 
-    react: function (reactContexts) {
-      context.getPluginsAndContextsFromContexts(reactContexts, 'reactions')
+    execute: function (pluginContexts) {
+      var matchedContexts = {}
+
+      // The plugin gives a set of contexts to check on.
+      $.each(pluginContexts, function (contextName, contextDefinition) {
+        var matches = {}
+        $.each(contextDefinition.conditions, function (pluginName, pluginData) {
+          var pluginPath = context.activeConditionPlugins[pluginName]
+          var plugin = require(pluginPath)
+          var match = plugin.execute(pluginData)
+
+          matches[pluginName] = match
+        })
+
+        var matchContext = false
+        var matchContextCounter = 0
+
+        $.each(matches, function (plugin, match) {
+          // matchAllConditions
+          if (contextDefinition.matchAllConditions && contextDefinition.matchAllConditions == true && match == true) {
+            matchContextCounter++
+
+            matchContext = Math.floor(_.size(matches) / matchContextCounter)
+          }
+
+          // NOT matchAllConditions
+          else {
+            if (match == true) {
+              matchContext = true
+            }
+          }
+        })
+
+        if (matchContext == true) {
+          matchedContexts[contextName] = contextDefinition
+        }
+      })
+
+      context.getPluginsAndContextsFromContexts(matchedContexts, 'reactions')
 
       // Init all condition plugins.
       $.each(context.plugins['reactions'], function (pluginName, pluginInfo) {
@@ -30,7 +75,6 @@ define(['contexts'], function (contexts) {
           if (loadedPlugin.execute && typeof(loadedPlugin.execute) == 'function') {
             loadedPlugin.execute(pluginInfo.contexts)
           }
-          context.plugins['reactions'][pluginName].plugin = loadedPlugin
         })
       })
     },

@@ -5,8 +5,9 @@ define([], function () {
   var contexts = {
 
     'home': {
+      matchAllConditions: true,
       conditions: {
-        route: ['*']
+        route: ['*'],
       },
       reactions: {
         layer: [{
@@ -43,7 +44,7 @@ define([], function () {
 
     'devel': {
       conditions: {
-        route: ['*']
+        route: ['*'],
       },
       reactions: {
         dependencies: ['raamwerk/devel']

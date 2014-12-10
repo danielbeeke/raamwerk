@@ -5,7 +5,8 @@ require.config({
     twig: '../bower_components/twig.js/twig',
     dragdealer: '../bower_components/dragdealer/src/dragdealer',
     underscore: '../bower_components/underscore/underscore',
-    history: '../bower_components/history/history'
+    history: '../bower_components/history/history',
+    objectwatch: '../bower_components/object-watch/index'
   }
 })
 

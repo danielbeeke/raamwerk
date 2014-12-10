@@ -2,7 +2,6 @@ define(['raamwerk/context', 'history', 'raamwerk/smooth_transitions'], function 
   'use strict'
 
   // A context condition plugin gets a list of contexts that apply for the plugin.
-  // The only convention it has to follow is to pass the contexts onto context.react when needed,
   // Initiated by the init function.
 
   var route_context_condition = {
@@ -16,37 +15,34 @@ define(['raamwerk/context', 'history', 'raamwerk/smooth_transitions'], function 
 
       $(window).on('popstate smooth_transition', function(e) {
         var path = route_context_condition.cleanPath(location.pathname)
-        route_context_condition.execute(path)
+        context.execute(contexts)
       })
 
       // Initial path.
       $(window).triggerHandler('smooth_transition')
     },
 
-    // Execute
-    execute: function (path) {
-      var contextsToTrigger = {}
+    execute: function (data) {
+      var path = route_context_condition.cleanPath(location.pathname)
+      var match = false
 
-      $.each(route_context_condition.contexts, function (contextName, contextDefinition) {
-        $.each(contextDefinition.conditions.route, function (delta, conditionPath) {
-          if (route_context_condition.compare(path, conditionPath) == true) {
-            contextsToTrigger[contextName] = contextDefinition
-          }
-        })
+      $.each(data, function (delta, conditionPath) {
+        if (route_context_condition.compare(path, conditionPath) == true) {
+          match = true
+        }
       })
 
-      // Pass the contexts to trigger to the context module.
-      context.react(contextsToTrigger)
+      return match
+    },
+
+    compare: function (path, conditionPath) {
+      return (conditionPath == '<front>' && path == '') ? true : new RegExp(route_context_condition.convertToRegExp(conditionPath), 'ig').test(path)
     },
 
     cleanPath: function (path) {
       // Clean the window.location.pathname
       if (path.charAt(0) == '/') path = path.substr(1)
       return path
-    },
-
-    compare: function (path, conditionPath) {
-      return (conditionPath == '<front>' && path == '') ? true : new RegExp(route_context_condition.convertToRegExp(conditionPath), 'ig').test(path)
     },
 
     // Converts route to a regular expression, e.g.: users/*/mickeymouse -> users\/.*\/mickeymouse
@@ -70,7 +66,6 @@ define(['raamwerk/context', 'history', 'raamwerk/smooth_transitions'], function 
       return String(str)
         .replace(new RegExp('[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\' + (delimiter || '') + '-]', 'g'), '\\$&');
     },
-
   }
 
   return route_context_condition
