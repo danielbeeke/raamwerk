@@ -4,6 +4,7 @@ define(['jquery', 'dragdealer'], function ($, dragdealer) {
   var journey = {
     init: function () {
 
+      // Create the drag timeline control.
       new dragdealer('journey-timeline-dragdealer', {
         horizontal: false,
         vertical: true,

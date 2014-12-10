@@ -1,0 +1,18 @@
+<div class="journey-timeline">
+  <div id="journey-timeline-dragdealer" class="journey-timeline-dragdealer">
+    <div class="handle"></div>
+  </div>
+
+  <div class="journey-stories-inside-dragdealer">
+    {% for story in journey['mijn-china-reis'].stories %}
+
+      <a href="{{ story.slug }}">
+
+        <h2 class="story--title">{{ story.title }}</h2>
+
+      </a>
+
+    {% endfor %}
+  </div>
+
+</div>
