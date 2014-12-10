@@ -34,10 +34,11 @@ $red: red;
   height: 100%;
   width: 100%;
   top: 0;
+  z-index: 2;
 }
 
 .journey-timeline-dragdealer .handle {
-  @include grid-span(1, 8, 8);
+  @include grid-span(8, 1, 8);
   position: absolute;
   top: 0;
   right: 0;

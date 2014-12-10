@@ -1,8 +1,15 @@
 <div class="journey-timeline">
   <div id="journey-timeline-dragdealer" class="journey-timeline-dragdealer">
     <div class="handle">
-    {{ child('journey/titles', timeline, 'timeline') }}
+      <div class="handle-fixed-wrapper">
+        <div class="timeline--titles in-handle">
+          {{ child('journey/titles', timeline, 'timeline') }}
+        </div>
+      </div>
     </div>
   </div>
 
+  <div class="timeline--titles standard">
+    {{ child('journey/titles', timeline, 'timeline') }}
+  </div>
 </div>
