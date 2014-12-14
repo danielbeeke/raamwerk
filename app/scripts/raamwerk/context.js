@@ -1,4 +1,4 @@
-define(['contexts', 'underscore'], function (contexts, _) {
+define(['contexts', 'underscore', 'async'], function (contexts, _, async) {
   'use strict'
 
   var context = {
@@ -69,13 +69,35 @@ define(['contexts', 'underscore'], function (contexts, _) {
 
       context.getPluginsAndContextsFromContexts(matchedContexts, 'reactions')
 
-      // Init all condition plugins.
+      var plugins = []
+      var initBuffers = []
+
       $.each(context.plugins['reactions'], function (pluginName, pluginInfo) {
-        require(['raamwerk/context/' + pluginName + '_context_reaction'], function (loadedPlugin) {
-          if (loadedPlugin.execute && typeof(loadedPlugin.execute) == 'function') {
-            loadedPlugin.execute(pluginInfo.contexts)
-          }
+        plugins.push('raamwerk/context/' + pluginName + '_context_reaction')
+      })
+
+      // Init all condition plugins.
+      require(plugins, function () {
+        // Sort the plugins on plugin weight.
+        context.plugins['reactions'] = _.sortBy(context.plugins['reactions'], function (pluginInfo, pluginName) {
+          pluginInfo.name = pluginName
+          var plugin = require('raamwerk/context/' + pluginName + '_context_reaction')
+          return plugin.weight
         })
+
+        $.each(context.plugins['reactions'], function (delta, pluginInfo) {
+          var plugin = require('raamwerk/context/' + pluginInfo.name + '_context_reaction')
+
+          initBuffers.push(function (callback) {
+            plugin.execute(pluginInfo.contexts, function () {
+              callback()
+            })
+          })
+        })
+
+        // Call all the functions in series, so that we can use weights in de modules.
+        // Main modules that needs the weights is the dependency module.
+        async.series(initBuffers)
       })
     },
 

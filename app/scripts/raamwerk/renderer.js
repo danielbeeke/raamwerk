@@ -1,4 +1,4 @@
-define(['twig'], function (twig) {
+define(['twig', 'templates'], function (twig, templates) {
   'use strict'
 
   // Makes it possible to render sub templates.
@@ -14,10 +14,9 @@ define(['twig'], function (twig) {
   })
 
   var renderer = {
-    twigTemplates: {},
     // Get's a twig template and renders it to HTML.
     get: function (template, data) {
-      if (!renderer.twigTemplates[template]) {
+      if (!templates[template]) {
         var loaded = twig.twig({
           id: template,
           href: '/templates/' + template + '.html',
@@ -25,12 +24,12 @@ define(['twig'], function (twig) {
         })
 
         if (loaded) {
-          renderer.twigTemplates[template] = true
+          templates[template] = loaded
         }
       }
 
-      if (renderer.twigTemplates[template]) {
-        return twig.twig({ ref: template }).render(data)
+      if (templates[template]) {
+        return templates[template].render(data)
       }
     },
   }

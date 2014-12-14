@@ -2,9 +2,20 @@ define([], function () {
   'use strict'
 
   var dependencies_context_reaction = {
-    execute: function (contexts) {
+    weight: -100,
+    execute: function (contexts, callback) {
+      var dependenciesToLoad = []
+
       $.each(contexts, function (contextName, contextDefinition) {
-        require(contextDefinition.reactions.dependencies)
+        $.each(contextDefinition.reactions.dependencies, function (delta, dependency) {
+          dependenciesToLoad.push(dependency)
+        })
+      })
+
+      require(dependenciesToLoad, function () {
+        if (callback && typeof callback == 'function') {
+          callback()
+        }
       })
     }
   }
